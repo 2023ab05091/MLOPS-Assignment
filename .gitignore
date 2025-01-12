@@ -170,4 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-.vs/
+#.vs/
+/.vs/MLOPS-Assignment/FileContentIndex/d80f89b0-6d0e-4899-bffc-64f21f21304f.vsidx
