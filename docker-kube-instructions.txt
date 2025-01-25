@@ -1,0 +1,31 @@
+docker build -f Dockerfile -t forest-fire-app:latest .
+
+docker run -p 8000:8001 forest-fire-app
+
+kubectl create --filename deployment.yml
+
+kubectl create --filename service.yml
+
+kubectl get all
+
+#Loading the Docker Image into Minikube
+minikube image load forest-fire-app:latest
+
+#query the Kubernetes cluster resources to verify that the pods are running.
+kubectl get all
+
+#generate a network tunnel from the host machine to the minikube cluster to route traffic through by issuing the minikube tunnable command letting it run continuously in it's own terminal.
+minikube tunnel
+
+#Then in another terminal, use the following command to determine the external IP the REST API app's network service.
+kubectl get services
+
+#hit that external IP and mapped port with HTTP
+
+
+
+#At the end before closing, delete the deployment and service
+
+kubectl delete deployment forest-fire-app-deploy
+
+kubectl delete service forest-fire-app-svc
