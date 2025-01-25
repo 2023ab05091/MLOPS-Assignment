@@ -1,6 +1,9 @@
 name: CI Pipeline
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
   lint:
@@ -47,20 +50,9 @@ jobs:
       run: |
         pytest
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build Docker image
-      run: docker build -t forest-fire-app:latest .
-
   mlflow:
     runs-on: ubuntu-latest
-    needs: build
+    needs: test
 
     steps:
     - name: Checkout code
