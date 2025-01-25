@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 import warnings
 import pickle
 import mlflow
+from datetime import datetime
 from mlflow.models.signature import infer_signature
 from sklearn.metrics import accuracy_score
 warnings.filterwarnings("ignore")
@@ -17,25 +18,42 @@ y = data[1:, -1]
 y = y.astype('int')
 X = X.astype('int')
 # print(X,y)
+
+# Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-# Define the model hyperparameters
-params = {
-    "solver": "lbfgs",
-    "max_iter": 1000,
-    "multi_class": "auto",
-    "random_state": 8888,
+# Define the parameter grid for hyperparameter tuning
+param_grid = {
+    'solver': ['lbfgs', 'liblinear'],
+    'max_iter': [100, 200, 500, 1000],
+    'multi_class': ['auto', 'ovr'],
+    'random_state': [8888]
 }
 
-# Train the model
-lr = LogisticRegression(**params)
-lr.fit(X_train, y_train)
+# Initialize the Logistic Regression model
+lr = LogisticRegression()
 
-# Predict on the test set
-y_pred = lr.predict(X_test)
+# Initialize GridSearchCV with 5-fold cross-validation
+grid_search = GridSearchCV(estimator=lr, param_grid=param_grid, cv=5, scoring='accuracy')
 
-# Calculate metrics
+# Perform GridSearchCV to find the best hyperparameters
+grid_search.fit(X_train, y_train)
+
+# Get the best parameters and best estimator from GridSearchCV
+best_params = grid_search.best_params_
+# Print the best parameters
+print(f"Best Parameters: {best_params}")
+
+best_estimator = grid_search.best_estimator_
+
+# Predict on the test set using the best estimator
+y_pred = best_estimator.predict(X_test)
+
+# Calculate the accuracy of the model
 accuracy = accuracy_score(y_test, y_pred)
+
+# Print the accuracy
+print(f"Accuracy: {accuracy}")
 
 # Create a new MLflow Experiment
 mlflow.set_experiment("Forest Fire MLFlow")
@@ -43,8 +61,8 @@ mlflow.set_experiment("Forest Fire MLFlow")
 run_name = datetime.now().strftime("%Y%m%d_%H%M%S")
 # Start an MLflow run
 with mlflow.start_run(run_name = run_name) as mlflow_run:
-    # Log the hyperparameters
-    mlflow.log_params(params)
+    # Log the best parameters and accuracy to MLflow
+    mlflow.log_params(best_params)
 
     # Log the loss metric
     mlflow.log_metric("accuracy", accuracy)

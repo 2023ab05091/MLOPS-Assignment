@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/balu-mahesh/mtech/git-repo/MLOPS-Assignment/mlruns/759875009788452879/90e6e0efe5b14dbda7e3be0190c435ab/artifacts
+end_time: 1737599130219
+entry_point_name: ''
+experiment_id: '759875009788452879'
+lifecycle_stage: active
+run_id: 90e6e0efe5b14dbda7e3be0190c435ab
+run_name: brawny-calf-908
+run_uuid: 90e6e0efe5b14dbda7e3be0190c435ab
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1737599125053
+status: 3
+tags: []
+user_id: pc
