@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/balu-mahesh/mtech/git-repo/MLOPS-Assignment/mlruns/759875009788452879/cce16b0e929346c8bfd8927863c2345d/artifacts
+end_time: 1737805968151
+entry_point_name: ''
+experiment_id: '759875009788452879'
+lifecycle_stage: active
+run_id: cce16b0e929346c8bfd8927863c2345d
+run_name: '20250125_172247'
+run_uuid: cce16b0e929346c8bfd8927863c2345d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1737805968095
+status: 4
+tags: []
+user_id: pc

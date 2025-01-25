@@ -1,13 +1,14 @@
+import warnings
+import pickle
+from datetime import datetime
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
-import warnings
-import pickle
-import mlflow
-from datetime import datetime
-from mlflow.models.signature import infer_signature
 from sklearn.metrics import accuracy_score
+import mlflow
+from mlflow.models.signature import infer_signature
+
 warnings.filterwarnings("ignore")
 
 data = pd.read_csv("Forest_fire.csv")
@@ -20,7 +21,9 @@ X = X.astype('int')
 # print(X,y)
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=0
+)
 
 # Define the parameter grid for hyperparameter tuning
 param_grid = {
@@ -32,9 +35,12 @@ param_grid = {
 
 # Initialize the Logistic Regression model
 lr = LogisticRegression()
+lr.fit(X_train, y_train)
 
 # Initialize GridSearchCV with 5-fold cross-validation
-grid_search = GridSearchCV(estimator=lr, param_grid=param_grid, cv=5, scoring='accuracy')
+grid_search = GridSearchCV(
+    estimator=lr, param_grid=param_grid, cv=5, scoring='accuracy'
+)
 
 # Perform GridSearchCV to find the best hyperparameters
 grid_search.fit(X_train, y_train)
@@ -60,7 +66,7 @@ mlflow.set_experiment("Forest Fire MLFlow")
 
 run_name = datetime.now().strftime("%Y%m%d_%H%M%S")
 # Start an MLflow run
-with mlflow.start_run(run_name = run_name) as mlflow_run:
+with mlflow.start_run(run_name=run_name) as mlflow_run:
     # Log the best parameters and accuracy to MLflow
     mlflow.log_params(best_params)
 
@@ -68,10 +74,14 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
     mlflow.log_metric("accuracy", accuracy)
 
     # Set a tag that we can use to remind ourselves what this run was for
-    mlflow.set_tag("Training Info", "Basic LR model for Forest Fire prediction")
+    mlflow.set_tag(
+        "Training Info", "Basic LR model for Forest Fire prediction"
+    )
 
     # Infer the model signature
-    signature = infer_signature(X_train, lr.predict(X_train))
+    signature = infer_signature(
+        X_train, lr.predict(X_train)
+    )
 
     mlflow_run_id = mlflow_run.info.run_id
     print("MLFlow Run ID: ", mlflow_run_id)
@@ -85,5 +95,8 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
         registered_model_name="tracking-quickstart",
     )
 
-pickle.dump(lr, open('model.pkl','wb'))
-model=pickle.load(open('model.pkl','rb'))
+with open('model.pkl', 'wb') as model_file:
+    pickle.dump(lr, model_file)
+
+with open('model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
