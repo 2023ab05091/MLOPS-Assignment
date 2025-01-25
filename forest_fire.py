@@ -1,7 +1,3 @@
-"""
-This module trains a Logistic Regression model to predict forest fires and logs the results using MLflow.
-"""
-
 import warnings
 import pickle
 from datetime import datetime
@@ -99,5 +95,3 @@ with open('model.pkl', 'wb') as model_file:
 
 with open('model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
-
-# end of the file
