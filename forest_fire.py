@@ -35,6 +35,7 @@ param_grid = {
 
 # Initialize the Logistic Regression model
 lr = LogisticRegression()
+lr.fit(X_train, y_train)
 
 # Initialize GridSearchCV with 5-fold cross-validation
 grid_search = GridSearchCV(
