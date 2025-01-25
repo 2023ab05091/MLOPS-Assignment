@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forest-fire-app-deploy
+  labels:
+    type: webapp
+spec:
+  selector:
+    matchLabels:
+      app: forest-fire-app
+  replicas: 3
+  template:
+    metadata:
+      name: forest-fire-app-tmpl
+      labels:
+        app: forest-fire-app
+    spec:
+      containers:
+        - name: forest-fire-app
+          image: forest-fire-app:latest
+          ports:
+            - containerPort: 8000
