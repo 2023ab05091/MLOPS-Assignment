@@ -78,7 +78,9 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
     mlflow.set_tag("Training Info", "Basic LR model for Forest Fire prediction")
 
     # Infer the model signature
-    signature = infer_signature(X_train, lr.predict(X_train))
+    signature = infer_signature(
+        X_train, lr.predict(X_train)
+    )
 
     mlflow_run_id = mlflow_run.info.run_id
     print("MLFlow Run ID: ", mlflow_run_id)
@@ -97,3 +99,5 @@ with open('model.pkl', 'wb') as model_file:
 
 with open('model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
+
+# end of the file
