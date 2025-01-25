@@ -98,5 +98,6 @@ class TestForestFireModel(unittest.TestCase):
             model = pickle.load(model_file)
         self.assertIsInstance(model, LogisticRegression)
 
+
 if __name__ == '__main__':
     unittest.main()
