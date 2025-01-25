@@ -40,12 +40,12 @@ def predict():
 
     if float(output) > 0.5:
         return render_template(
-            'forest_fire.html', 
+            'forest_fire.html',
             pred='Your Forest is in Danger.\nProbability of fire occurring is {}'.format(output)
         )
     else:
         return render_template(
-            'forest_fire.html', 
+            'forest_fire.html',
             pred='Your Forest is safe.\nProbability of fire occurring is {}'.format(output)
         )
 

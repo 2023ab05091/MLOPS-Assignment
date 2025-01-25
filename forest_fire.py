@@ -37,7 +37,9 @@ param_grid = {
 lr = LogisticRegression()
 
 # Initialize GridSearchCV with 5-fold cross-validation
-grid_search = GridSearchCV(estimator=lr, param_grid=param_grid, cv=5, scoring='accuracy')
+grid_search = GridSearchCV(
+    estimator=lr, param_grid=param_grid, cv=5, scoring='accuracy'
+)
 
 # Perform GridSearchCV to find the best hyperparameters
 grid_search.fit(X_train, y_train)
@@ -71,7 +73,9 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
     mlflow.log_metric("accuracy", accuracy)
 
     # Set a tag that we can use to remind ourselves what this run was for
-    mlflow.set_tag("Training Info", "Basic LR model for Forest Fire prediction")
+    mlflow.set_tag(
+        "Training Info", "Basic LR model for Forest Fire prediction"
+    )
 
     # Infer the model signature
     signature = infer_signature(
