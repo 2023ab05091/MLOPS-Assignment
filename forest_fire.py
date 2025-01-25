@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 import warnings
 import pickle
 import mlflow
+from datetime import datetime
 from mlflow.models.signature import infer_signature
 from sklearn.metrics import accuracy_score
 warnings.filterwarnings("ignore")
