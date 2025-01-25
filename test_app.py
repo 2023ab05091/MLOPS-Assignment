@@ -19,12 +19,6 @@ def test_ready(client: FlaskClient):
     assert response.status_code == 200
 
 
-def test_hello_world(client: FlaskClient):
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b'forest_fire.html' in response.data
-
-
 def test_predict(client: FlaskClient, mocker):
     mocker.patch('app.model.predict_proba', return_value=[[0, 0.6]])
     response = client.post('/predict', data={'feature1': 1, 'feature2': 2})

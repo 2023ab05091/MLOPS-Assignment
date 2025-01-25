@@ -24,11 +24,6 @@ def redirect_url():
     return request.args.get('next') or request.referrer or url_for('index')
 
 
-@app.route('/')
-def hello_world():
-    return render_template("forest_fire.html")
-
-
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     int_features = [int(x) for x in request.form.values()]

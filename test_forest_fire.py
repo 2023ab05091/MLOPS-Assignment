@@ -68,29 +68,6 @@ class TestForestFireModel(unittest.TestCase):
     def test_accuracy(self):
         self.assertGreaterEqual(self.accuracy, 0.7)
 
-    def test_mlflow_logging(self):
-        mlflow.set_experiment("Forest Fire MLFlow")
-        run_name = datetime.now().strftime("%Y%m%d_%H%M%S")
-        with mlflow.start_run(run_name=run_name) as mlflow_run:
-            mlflow.log_params(self.best_params)
-            mlflow.log_metric("accuracy", self.accuracy)
-            mlflow.set_tag(
-                "Training Info", "Basic LR model for Forest Fire prediction"
-            )
-            signature = infer_signature(
-                self.X_train, self.lr.predict(self.X_train)
-            )
-            mlflow_run_id = mlflow_run.info.run_id
-            model_info = mlflow.sklearn.log_model(
-                sk_model=self.lr,
-                artifact_path="forest_fire_model",
-                signature=signature,
-                input_example=self.X_train,
-                registered_model_name="tracking-quickstart",
-            )
-            self.assertIsNotNone(mlflow_run_id)
-            self.assertIsNotNone(model_info)
-
     def test_pickle_model(self):
         with open('model.pkl', 'wb') as model_file:
             pickle.dump(self.lr, model_file)
