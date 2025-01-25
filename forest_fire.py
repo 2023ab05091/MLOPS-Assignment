@@ -1,13 +1,18 @@
+"""
+This module trains a Logistic Regression model to predict forest fires and logs the results using MLflow.
+"""
+
+import warnings
+import pickle
+from datetime import datetime
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
-import warnings
-import pickle
-import mlflow
-from datetime import datetime
-from mlflow.models.signature import infer_signature
 from sklearn.metrics import accuracy_score
+import mlflow
+from mlflow.models.signature import infer_signature
+
 warnings.filterwarnings("ignore")
 
 data = pd.read_csv("Forest_fire.csv")
@@ -20,7 +25,9 @@ X = X.astype('int')
 # print(X,y)
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=0
+)
 
 # Define the parameter grid for hyperparameter tuning
 param_grid = {
@@ -85,5 +92,8 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
         registered_model_name="tracking-quickstart",
     )
 
-pickle.dump(lr, open('model.pkl', 'wb'))
-model=pickle.load(open('model.pkl', 'rb'))
+with open('model.pkl', 'wb') as model_file:
+    pickle.dump(lr, model_file)
+
+with open('model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
