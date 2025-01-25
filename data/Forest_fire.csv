@@ -1,20 +1,20 @@
 Area,Oxygen,Temperature,Humidity,Fire Occurrence
-Jharkand,40,45,20,1
+Hyderabad,40,45,20,1
 Bangalore,50,30,10,1
-Ecuador,10,20,70,0
+Delhi,10,20,70,0
 a,60,45,70,1
 Bangalore,30,48,10,1
 c,50,15,30,0
 de,5,35,35,0
 asd,5,20,70,0
-Ecuador,60,32,19,1
+Mumbai,60,32,19,1
 r,30,50,45,1
 t,40,55,80,1
 y,30,39,100,0
-Jharkand,10,12,12,0
+Chennai,10,12,12,0
 Bangalore,20,23,23,0
-Ecuador,60,34,15,1
-canada,80,4,68,0
+Cochin,60,34,15,1
+Kolkata,80,4,68,0
 c,25,56,79,1
 c,12,45,90,0
 asd,28,43,15,1
