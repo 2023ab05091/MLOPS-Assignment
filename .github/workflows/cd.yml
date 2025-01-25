@@ -26,7 +26,7 @@ jobs:
 
     - name: Deploy to Minikube
       run: |
-        kubectl create --filename deployment.yaml
-        kubectl create --filename service.yaml
+        kubectl create --filename deployment.yml
+        kubectl create --filename service.yml
         # kubectl create deployment forest-fire-app --image=forest-fire-app:latest
         # kubectl expose deployment forest-fire-app --type=LoadBalancer --port=8000
