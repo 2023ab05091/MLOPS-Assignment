@@ -38,11 +38,11 @@ def predict():
     prediction = model.predict_proba(final)
     output = '{0:.{1}f}'.format(prediction[0][1], 2)
 
-    if output > str(0.5):
-        return render_template('forest_fire.html', pred='Your Forest is in Danger.\nProbability of fire occurring is {}'.format(output), bhai="Forest is in danger now")
+    if float(output) > 0.5:
+        return render_template('forest_fire.html', pred='Your Forest is in Danger.\nProbability of fire occurring is {}'.format(output))
     else:
-        return render_template('forest_fire.html', pred='Your Forest is safe.\nProbability of fire occurring is {}'.format(output), bhai="Forest is Safe for now")
+        return render_template('forest_fire.html', pred='Your Forest is safe.\nProbability of fire occurring is {}'.format(output))
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8001)
+    app.run(debug=False, port=8001)
