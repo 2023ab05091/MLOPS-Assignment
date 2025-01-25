@@ -65,7 +65,7 @@ mlflow.set_experiment("Forest Fire MLFlow")
 
 run_name = datetime.now().strftime("%Y%m%d_%H%M%S")
 # Start an MLflow run
-with mlflow.start_run(run_name = run_name) as mlflow_run:
+with mlflow.start_run(run_name=run_name) as mlflow_run:
     # Log the best parameters and accuracy to MLflow
     mlflow.log_params(best_params)
 
