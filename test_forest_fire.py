@@ -9,6 +9,7 @@ import mlflow
 from datetime import datetime
 from mlflow.models.signature import infer_signature
 
+
 class TestForestFireModel(unittest.TestCase):
 
     @classmethod
@@ -38,7 +39,8 @@ class TestForestFireModel(unittest.TestCase):
 
         # Initialize GridSearchCV with 5-fold cross-validation
         cls.grid_search = GridSearchCV(
-            estimator=cls.lr, param_grid=cls.param_grid, cv=5, scoring='accuracy'
+            estimator=cls.lr,
+            param_grid=cls.param_grid, cv=5, scoring='accuracy'
         )
 
         # Perform GridSearchCV to find the best hyperparameters
@@ -72,8 +74,12 @@ class TestForestFireModel(unittest.TestCase):
         with mlflow.start_run(run_name=run_name) as mlflow_run:
             mlflow.log_params(self.best_params)
             mlflow.log_metric("accuracy", self.accuracy)
-            mlflow.set_tag("Training Info", "Basic LR model for Forest Fire prediction")
-            signature = infer_signature(self.X_train, self.lr.predict(self.X_train))
+            mlflow.set_tag(
+                "Training Info", "Basic LR model for Forest Fire prediction"
+            )
+            signature = infer_signature(
+                self.X_train, self.lr.predict(self.X_train)
+            )
             mlflow_run_id = mlflow_run.info.run_id
             model_info = mlflow.sklearn.log_model(
                 sk_model=self.lr,
