@@ -6,6 +6,21 @@ app = Flask(__name__)
 
 model=pickle.load(open('model.pkl','rb'))
 
+@app.route('/healthz')
+def healthz():
+    # Liveness probe endpoint
+    # Simply returns HTTP 200 OK to indicate the server is alive
+    return '', 200
+
+@app.route('/ready')
+def ready():
+    # Readiness probe endpoint
+    return '', 200  # Return HTTP 200 OK to indicate readiness
+
+def redirect_url():
+	return request.args.get('next') or \
+		request.referrer or \
+		url_for('index')
 
 @app.route('/')
 def hello_world():
@@ -28,4 +43,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8001)
