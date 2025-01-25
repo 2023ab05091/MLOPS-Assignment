@@ -39,15 +39,15 @@ def predict():
     output = '{0:.{1}f}'.format(prediction[0][1], 2)
 
     if float(output) > 0.5:
-    return render_template(
-        'forest_fire.html', 
-        pred='Your Forest is in Danger.\nProbability of fire occurring is {}'.format(output)
-    )
-else:
-    return render_template(
-        'forest_fire.html', 
-        pred='Your Forest is safe.\nProbability of fire occurring is {}'.format(output)
-    )
+        return render_template(
+            'forest_fire.html', 
+            pred='Your Forest is in Danger.\nProbability of fire occurring is {}'.format(output)
+        )
+    else:
+        return render_template(
+            'forest_fire.html', 
+            pred='Your Forest is safe.\nProbability of fire occurring is {}'.format(output)
+        )
 
 
 if __name__ == '__main__':
