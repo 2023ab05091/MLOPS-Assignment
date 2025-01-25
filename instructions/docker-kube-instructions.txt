@@ -2,6 +2,11 @@ docker build -f Dockerfile -t forest-fire-app:latest .
 
 docker run -p 8000:8001 forest-fire-app
 
+minikube start
+
+kubectl get deployments
+kubectl get services
+
 kubectl create --filename deployment.yml
 
 kubectl create --filename service.yml
