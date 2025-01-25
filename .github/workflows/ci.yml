@@ -47,9 +47,30 @@ jobs:
       run: |
         pytest
 
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # - name: Set up Minikube
+    #   run: |
+    #     curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    #     chmod +x minikube
+    #     sudo mv minikube /usr/local/bin/
+    #     sudo minikube start --driver=none
+
+    # - name: Set up Docker to use Minikube's Docker daemon
+    #   run: eval $(minikube docker-env)
+
+    - name: Build Docker image
+      run: docker build -t forest-fire-app:latest .
+
   mlflow:
     runs-on: ubuntu-latest
-    needs: lint
+    needs: build
 
     steps:
     - name: Checkout code
