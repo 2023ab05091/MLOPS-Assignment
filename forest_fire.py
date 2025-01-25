@@ -85,5 +85,5 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
         registered_model_name="tracking-quickstart",
     )
 
-pickle.dump(lr, open('model.pkl','wb'))
-model=pickle.load(open('model.pkl','rb'))
+pickle.dump(lr, open('model.pkl', 'wb'))
+model=pickle.load(open('model.pkl', 'rb'))
