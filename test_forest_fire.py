@@ -5,9 +5,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score
 import pickle
-import mlflow
-from datetime import datetime
-from mlflow.models.signature import infer_signature
 
 
 class TestForestFireModel(unittest.TestCase):
