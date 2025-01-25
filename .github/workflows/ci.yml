@@ -30,7 +30,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: lint
 
     steps:
     - name: Checkout code
@@ -53,7 +52,6 @@ jobs:
 
   mlflow:
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
     - name: Checkout code
@@ -72,4 +70,4 @@ jobs:
 
     - name: Run MLflow
       run: |
-        python forest_fire.py
+        mlflow run .
