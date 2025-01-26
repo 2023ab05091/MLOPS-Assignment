@@ -10,8 +10,11 @@ COPY requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
-COPY . .
+# Copy the necessary files and directories into the container
+COPY static/ templates/ app.py requirements.txt deployment.yml service.yml forest_fire.csv forest_fire.py model.pkl /app/
+COPY static/ /app/static/
+COPY templates/ /app/templates/
+COPY app.py requirements.txt deployment.yml service.yml forest_fire.csv forest_fire.py model.pkl  /app/
 
 # Expose the port the app runs on
 EXPOSE 8001
