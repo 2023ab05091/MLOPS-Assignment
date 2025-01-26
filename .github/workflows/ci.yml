@@ -70,4 +70,4 @@ jobs:
 
     - name: Run MLflow
       run: |
-        python forest_fire.py
+        mlflow run .
