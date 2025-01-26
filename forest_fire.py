@@ -29,7 +29,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 param_grid = {
     'solver': ['lbfgs', 'liblinear'],
     'max_iter': [100, 200, 500, 1000],
-    'multi_class': ['auto', 'ovr'],
+    'multi_class': ['auto'],
     'random_state': [8888]
 }
 
