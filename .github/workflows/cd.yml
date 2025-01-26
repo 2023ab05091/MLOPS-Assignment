@@ -24,9 +24,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Deploy to Minikube
+    - name: Set up Kubernetes
       run: |
-        kubectl create --filename deployment.yml --validate=false
-        kubectl create --filename service.yml
-        # kubectl create deployment forest-fire-app --image=forest-fire-app:latest
-        # kubectl expose deployment forest-fire-app --type=LoadBalancer --port=8000
+        # Ensure Minikube or Kubernetes is installed
+        minikube start || true
+        kubectl cluster-info
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl create deployment forest-fire-app --image=forest-fire-app:latest
+        kubectl expose deployment forest-fire-app --type=LoadBalancer --port=8000
