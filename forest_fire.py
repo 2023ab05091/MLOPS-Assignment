@@ -11,7 +11,7 @@ from mlflow.models.signature import infer_signature
 
 warnings.filterwarnings("ignore")
 
-data = pd.read_csv("Forest_fire.csv")
+data = pd.read_csv("forest_fire.csv")
 data = np.array(data)
 
 X = data[1:, 1:-1]

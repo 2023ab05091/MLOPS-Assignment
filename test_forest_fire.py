@@ -12,7 +12,7 @@ class TestForestFireModel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Load the data
-        cls.data = pd.read_csv("Forest_fire.csv")
+        cls.data = pd.read_csv("forest_fire.csv")
         cls.data = np.array(cls.data)
 
         cls.X = cls.data[1:, 1:-1].astype('int')
