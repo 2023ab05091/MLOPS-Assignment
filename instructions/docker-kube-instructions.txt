@@ -1,6 +1,14 @@
 docker build -f Dockerfile -t forest-fire-app:latest .
 
-docker run -p 8000:8001 forest-fire-app
+docker run --rm -it -p 8000:8001 forest-fire-app
+
+docker images
+docker ps
+docker stop <container-name>
+
+docker rmi <image_name_or_id>
+docker rm <container_name_or_id>
+docker container prune
 
 minikube start
 
