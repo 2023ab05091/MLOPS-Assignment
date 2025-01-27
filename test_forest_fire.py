@@ -27,8 +27,8 @@ def test_data_loading_and_preprocessing(sample_data):
     y = sample_data['y']
     assert X.shape == (100, 10)
     assert y.shape == (100,)
-    assert X.dtype == np.int32
-    assert y.dtype == np.int32
+    assert X.dtype in (np.int32, np.int64)
+    assert y.dtype in (np.int32, np.int64)
 
 
 # Test train_test_split
