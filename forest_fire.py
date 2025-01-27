@@ -28,7 +28,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Define the parameter grid for hyperparameter tuning
 param_grid = {
     'solver': ['lbfgs', 'liblinear'],
-    'max_iter': [100, 200, 500, 1000],
+    'max_iter': [50, 100, 200, 500, 1000],
     'multi_class': ['auto', 'ovr'],
     'random_state': [8888]
 }
