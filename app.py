@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, url_for, render_template, jsonify
 import pickle
 import numpy as np
 
@@ -34,27 +34,29 @@ def landing():
 def predict():
     int_features = [int(x) for x in request.form.values()]
     final = [np.array(int_features)]
-    print(int_features)
     print(final)
+
     prediction = model.predict_proba(final)
     output = '{0:.{1}f}'.format(prediction[0][1], 2)
 
+    result = {}
+    result['value'] = output
+
     if float(output) > 0.5:
-        return render_template(
-            'forest_fire.html',
-            pred=(
-                'Your Forest is in Danger.\n'
-                'Probability of fire occurring is {}'.format(output)
-            )
+        result['status'] = 'danger'
+        result['text'] = (
+            'Your Forest is in Danger. Probability of fire occurring is {}'
+            .format(output)
         )
+
     else:
-        return render_template(
-            'forest_fire.html',
-            pred=(
-                'Your Forest is safe.\n'
-                'Probability of fire occurring is {}'.format(output)
-            )
+        result['status'] = 'safe'
+        result['text'] = (
+            'Your Forest is safe. Probability of fire occurring is {}'
+            .format(output)
         )
+
+    return jsonify(result)
 
 
 if __name__ == '__main__':

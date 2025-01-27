@@ -2,13 +2,14 @@ pip install dvc
 
 dvc init
 
+dvc config core.autostage true
+
 dvc remote add -d dvc-remote-storage ../dvc-storage
 
 dvc add data/
 
 git add data.dvc
 
-dvc config core.autostage true
 
 git commit -m "dvc changes"
 git tag -a "dvc-1.0" -m "first version"
@@ -17,6 +18,8 @@ git push
 dvc push
 
 make changes to data/forest_fire.csv
+
+dvc add data/
 
 git add data.dvc
 
