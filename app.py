@@ -44,13 +44,20 @@ def predict():
 
     if float(output) > 0.5:
         result['status'] = 'danger'
-        result['text'] = 'Your Forest is in Danger. Probability of fire occurring is {}'.format(output)
-        
+        result['text'] = (
+            'Your Forest is in Danger. Probability of fire occurring is {}'
+            .format(output)
+        )
+
     else:
         result['status'] = 'safe'
-        result['text'] = 'Your Forest is safe. Probability of fire occurring is {}'.format(output)
+        result['text'] = (
+            'Your Forest is safe. Probability of fire occurring is {}'
+            .format(output)
+        )
 
     return jsonify(result)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8001)
