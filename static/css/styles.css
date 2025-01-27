@@ -1,0 +1,20 @@
+.form {
+  margin-top: 30px;
+}
+
+.form .text-lg {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.prediction-text {
+  display: none;
+  font-size: larger;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 600px;
+  border-radius: 10px;
+  margin: 50px auto;
+}
+
